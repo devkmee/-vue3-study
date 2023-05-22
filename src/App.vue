@@ -16,14 +16,11 @@
                 </button>
             </div>
         </form>
-        <div class="card mt-2">
+        <div class="card mt-2"
+             v-for="t in todos"     :key="t.id"
+        >
             <div class="card-body p-2">
-                {{ todos[0].subject }}
-            </div>
-        </div>
-        <div class="card mt-2">
-            <div class="card-body p-2">
-                {{ todos[1].subject }}
+                {{ t.subject }}
             </div>
         </div>
     </div>
