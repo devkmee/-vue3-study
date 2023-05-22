@@ -1,38 +1,45 @@
 <template>
-    <div class="name">
+<!--<div v-on:class="nameClass"> ë°”ì¸ë”© í•  ë•Œ v-on ìƒëžµ ê°€ëŠ¥-->
+    <div :class="nameClass">
         <h1>{{ name }}</h1>
     </div>
-    <button class="btn btn-primary" v-on:click="updateName">Click</button>
-</template>
+    <input :type="text" :value="name" />
+    <button class="btn btn-primary" @click="updateName">Click</button>
+</template>                         
 
 <script>
 
-    //import { ref } from 'vue';    // ¿ø½ÃÅ¸ÀÔ
-    import { reactive } from 'vue'; // °´Ã¼
+    //import { reactive } from 'vue'; // ê°ì²´
+    import { ref } from 'vue';    // ì›ì‹œíƒ€ìž…
 
     export default {
         setup() {
-            //const name = ref('HONE');
-            const name = reactive({
-                id : 'user11'
-            });
+            /*const name = reactive({
+            id : 'user11'
+            });*/
+            const name = ref('HOME');
+            const type = ref('number');
+            const nameClass = ref('');
 
             const updateName = () => {
-                //name.value = 'Dodam';     // ref »ç¿ë
-                name.id = 'userRabbit';     // reactive »ç¿ë
-                console.log(name);
+                //name.id = 'userRabbit';     // reactive ì‚¬ìš©
+                name.value = 'Dodam';         // ref ì‚¬ìš©
+                type.value = 'text';
+                nameClass.value = 'name';
             };
 
             return {
                 name,
                 updateName,
+                type,
+                nameClass
             };
         }
     }
 </script>
 
 <style>
-    .name{
-        color : sienna
+    .name {
+        color: dodgerblue;
     }
 </style>
