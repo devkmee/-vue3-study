@@ -38,7 +38,9 @@
                            type="checkbox" 
                            v-model="t.completed"
                     />
-                    <label class="form-check-label">
+                    <label class="form-check-label"
+                           :class="{ todo : todo.completed }"
+                           >
                         {{ t.subject }}
                     </label>
                 </div>
@@ -57,6 +59,10 @@
             const todos = ref([]);
             const toggle = ref(false);
             const hasError = ref(false);
+            const todoStyle = {
+                textDecoration: 'line-through',
+                color: 'gray'
+            };
 
             const onToggle = () => {
                 toggle.value = !toggle.value;
@@ -76,8 +82,6 @@
                 }
             };
 
-           
-
             return {
                 todo
                 , onSubmit
@@ -85,6 +89,7 @@
                 , toggle
                 , onToggle
                 , hasError
+                , todoStyle
             };
         }
     }
@@ -92,6 +97,7 @@
 
 <style>
     .todo {
-        color: dodgerblue;
+        color: gray;
+        text-decoration-line : line-through;
     }
 </style>
