@@ -33,7 +33,15 @@
         <div class="card mt-2"
              v-for="t in todos" :key="t.id">
             <div class="card-body p-2">
-                {{ t.subject }}
+                <div class="form-check">
+                    <input class="form-check-input"
+                           type="checkbox" 
+                           v-model="t.completed"
+                    />
+                    <label class="form-check-label">
+                        {{ t.subject }}
+                    </label>
+                </div>
             </div>
         </div>
     </div>
@@ -46,10 +54,7 @@
     export default {
         setup() {
             const todo = ref('');
-            const todos = ref([
-                { id : 1, subject : '장보기' },
-                { id : 2, subject : '설거지' }
-            ]);
+            const todos = ref([]);
             const toggle = ref(false);
             const hasError = ref(false);
 
@@ -61,11 +66,13 @@
                 if (todo.value === '') {
                     hasError.value = true;
                 } else {
-                    hasError.value = false;
                     todos.value.push({
                         id: Date.now(),
-                        subject: todo.value
+                        subject: todo.value,
+                        completed : false
                     });
+                    hasError.value = false;
+                    todo.value = '';
                 }
             };
 
