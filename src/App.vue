@@ -39,7 +39,7 @@
                            v-model="t.completed"
                     />
                     <label class="form-check-label"
-                           :class="{ todo : todo.completed }"
+                           :class="{ todo: t.completed }"
                            >
                         {{ t.subject }}
                     </label>
