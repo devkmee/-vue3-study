@@ -31,20 +31,23 @@
             </div>
         </form>
         <div class="card mt-2"
-             v-for="t in todos" :key="t.id">
+             v-for="t in todos" 
+             :key="t.id">
+
             <div class="card-body p-2">
                 <div class="form-check">
                     <input class="form-check-input"
-                           type="checkbox" 
+                           type="checkbox"
                            v-model="t.completed"
                     />
                     <label class="form-check-label"
-                           :class="{ todo: t.completed }"
+                           :class=" { todo: t.completed} "
                            >
                         {{ t.subject }}
                     </label>
                 </div>
             </div>
+
         </div>
     </div>
 </template>                         
