@@ -32,7 +32,7 @@
                 if (todo.value === '') {
                     hasError.value = true;
                 } else {
-                    //부모컴포넌트 -> 자식컴포넌트로 데이터 보내는 용
+                    //자식컴포넌트 -> 부모컴포넌트로 데이터 보내는 용
                     context.emit('add-todo', {
                         id: Date.now(),
                         subject: todo.value,

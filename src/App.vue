@@ -6,30 +6,7 @@
         <div v-if="!todos.length">
             할 일을 추가해주세요
         </div>
-        <div class="card mt-2"
-             v-for="(t, index) in todos"
-             :key="t.id">
-
-            <div class="card-body p-2 d-flex alighn-items-center">
-                <div class="form-check flex-grow-1">
-                    <input class="form-check-input"
-                           type="checkbox"
-                           v-model="t.completed"
-                    />
-                    <label class="form-check-label"
-                           :class=" { todo: t.completed} "
-                           >
-                        {{ t.subject }}
-                    </label>
-                </div>
-                <div>
-                    <button class="btn btn-danger btn-sm"
-                            @click="deleteTodo(index)"
-                     >DELETE</button>
-                </div>
-            </div>
-
-        </div>
+        <TodoList :todos="todos"/>
     </div>
 </template>                         
 
@@ -37,10 +14,12 @@
     //import { reactive } from 'vue'; // 객체
     import { ref } from 'vue';    // 원시타입
     import TodoSimpleForm from './components/TodoSimpleForm.vue';
+    import TodoList from './components/TodoList.vue';
 
     export default {
         components: {
-            TodoSimpleForm
+            TodoSimpleForm,
+            TodoList
         },
         setup() {
             const todos = ref([]);
