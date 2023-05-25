@@ -21,7 +21,35 @@
 </template>
 
 <script>
-    export default {}
+    import { ref } from 'vue';
+
+    export default {
+        setup(props, context) {
+            const todo = ref('');
+            const hasError = ref(false);
+
+            const onSubmit = () => {
+                if (todo.value === '') {
+                    hasError.value = true;
+                } else {
+                    //부모컴포넌트 -> 자식컴포넌트로 데이터 보내는 용
+                    context.emit('add-todo', {
+                        id: Date.now(),
+                        subject: todo.value,
+                        completed: false
+                    });
+                    hasError.value = false;
+                    todo.value = '';
+                }
+            };
+
+            return {
+                todo,
+                hasError,
+                onSubmit
+            }
+        }
+    }
 </script>
 
 <style></style>

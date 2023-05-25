@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h2>TO-DO-LIST</h2>
-        <TodoSimpleFormVue/>
+        <TodoSimpleForm @add-todo="addTodo"/>
         
         <div v-if="!todos.length">
             할 일을 추가해주세요
@@ -36,33 +36,21 @@
 <script>
     //import { reactive } from 'vue'; // 객체
     import { ref } from 'vue';    // 원시타입
-    import TodoSimpleFormVue from './components/TodoSimpleForm.vue';
+    import TodoSimpleForm from './components/TodoSimpleForm.vue';
 
     export default {
         components: {
-            TodoSimpleFormVue
+            TodoSimpleForm
         },
         setup() {
-            const todo = ref('');
             const todos = ref([]);
-            const hasError = ref(false);
             const todoStyle = {
                 textDecoration: 'line-through',
                 color: 'gray'
             };
 
-            const onSubmit = () => {
-                if (todo.value === '') {
-                    hasError.value = true;
-                } else {
-                    todos.value.push({
-                        id: Date.now(),
-                        subject: todo.value,
-                        completed : false
-                    });
-                    hasError.value = false;
-                    todo.value = '';
-                }
+            const addTodo = (todo) => {
+                todos.value.push(todo);
             };
 
             const deleteTodo = (index) => {
@@ -70,10 +58,8 @@
             };
 
             return {
-                todo
-                , onSubmit
+                addTodo
                 , todos
-                , hasError
                 , todoStyle
                 , deleteTodo
             };
