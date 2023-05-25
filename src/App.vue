@@ -22,7 +22,7 @@
                 <div>
                     <button class="btn btn-primary"
                             type="submit">
-                        Add
+                        ADD
                     </button>
                 </div>
             </div>
@@ -30,12 +30,15 @@
                 This field cannot be empty
             </div>
         </form>
+        <div v-if="!todos.length">
+            할 일을 추가해주세요
+        </div>
         <div class="card mt-2"
-             v-for="t in todos" 
+             v-for="(t, index) in todos" 
              :key="t.id">
 
-            <div class="card-body p-2">
-                <div class="form-check">
+            <div class="card-body p-2 d-flex alighn-items-center">
+                <div class="form-check flex-grow-1">
                     <input class="form-check-input"
                            type="checkbox"
                            v-model="t.completed"
@@ -45,6 +48,11 @@
                            >
                         {{ t.subject }}
                     </label>
+                </div>
+                <div>
+                    <button class="btn btn-danger btn-sm"
+                            @click="deleteTodo(index)"
+                     >DELETE</button>
                 </div>
             </div>
 
@@ -85,6 +93,10 @@
                 }
             };
 
+            const deleteTodo = (index) => {
+                todos.value.splice(index, 1);
+            };
+
             return {
                 todo
                 , onSubmit
@@ -93,6 +105,7 @@
                 , onToggle
                 , hasError
                 , todoStyle
+                , deleteTodo
             };
         }
     }
