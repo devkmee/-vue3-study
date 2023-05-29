@@ -37,14 +37,16 @@
                 required : true
             }
         },
-        setup(props, context) {
+        emits: ['toggle-todo', 'delete-todo'],
+
+        setup(props, { emit } ) {
             const toggleTodo = (index) => {
-                context.emit('toggle-todo', index);
+                emit('toggle-todo', index);
             };
 
             const delTodo = (index) => {
              //부모컴포넌트로 넘기는 이벤트이름,  인덱스
-                context.emit('delete-todo', index);
+                emit('delete-todo', index);
             };
 
             return {

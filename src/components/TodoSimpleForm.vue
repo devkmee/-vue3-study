@@ -24,7 +24,9 @@
     import { ref } from 'vue';
 
     export default {
-        setup(props, context) {
+        emits: ['toggle-todo', 'delete-todo'],
+
+        setup(props, { emit }) {
             const todo = ref('');
             const hasError = ref(false);
 
@@ -33,7 +35,7 @@
                     hasError.value = true;
                 } else {
                     //자식컴포넌트 -> 부모컴포넌트로 데이터 보내는 용
-                    context.emit('add-todo', {
+                    emit('add-todo', {
                         id: Date.now(),
                         subject: todo.value,
                         completed: false
