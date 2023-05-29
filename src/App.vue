@@ -6,7 +6,11 @@
         <div v-if="!todos.length">
             할 일을 추가해주세요
         </div>
-        <TodoList :todos="todos" @toggle-todo="toggleTodo"/>
+        <TodoList 
+                  :todos="todos" 
+                  @toggle-todo="toggleTodo"
+                  @delete-todo="deleteTodo"
+         />
     </div>
 </template>                         
 

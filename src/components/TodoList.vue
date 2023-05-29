@@ -16,7 +16,7 @@
             </div>
             <div>
                 <button class="btn btn-danger btn-sm"
-                        @click="deleteTodo(index)">
+                        @click="delTodo(index)">
                     DELETE
                 </button>
             </div>
@@ -42,8 +42,14 @@
                 context.emit('toggle-todo', index);
             };
 
+            const delTodo = (index) => {
+             //부모컴포넌트로 넘기는 이벤트이름,  인덱스
+                context.emit('delete-todo', index);
+            };
+
             return {
                 toggleTodo,
+                delTodo,
             }
         }
     };
