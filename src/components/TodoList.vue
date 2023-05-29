@@ -7,7 +7,8 @@
             <div class="form-check flex-grow-1">
                 <input class="form-check-input"
                        type="checkbox"
-                       v-model="t.completed" />
+                       :value="t.completed"
+                @change="toggleTodo(index)"/>
                 <label class="form-check-label"
                        :class=" { todo: t.completed} ">
                     {{ t.subject }}
@@ -26,7 +27,7 @@
 
 <script>
     export default {
-        //부모 컴포넌트에서 바인딩한 이름
+        //부모 컴포넌트에서 바인딩한 이름으로 받아옴 
         //props: ['todos']
 
         //부모 컴포넌트에서 바인딩한 todos 객체로 받아서 정의
@@ -34,6 +35,15 @@
             todos: {
                 type: Array,
                 required : true
+            }
+        },
+        setup(props, context) {
+            const toggleTodo = (index) => {
+                context.emit('toggle-todo', index);
+            };
+
+            return {
+                toggleTodo,
             }
         }
     };

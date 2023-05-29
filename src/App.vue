@@ -6,7 +6,7 @@
         <div v-if="!todos.length">
             할 일을 추가해주세요
         </div>
-        <TodoList :todos="todos"/>
+        <TodoList :todos="todos" @toggle-todo="toggleTodo"/>
     </div>
 </template>                         
 
@@ -36,11 +36,17 @@
                 todos.value.splice(index, 1);
             };
 
+            const toggleTodo = (index) => {
+                console.log(todos.value[index]);
+                todos.value[index].completed = !todos.value[index].completed;
+            };
+
             return {
                 addTodo
                 , todos
                 , todoStyle
                 , deleteTodo
+                , toggleTodo
             };
         }
     }
