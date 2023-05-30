@@ -2,8 +2,18 @@
   "todos": [
     {
       "subject": "hello",
-      "completed": false,
+      "completed": true,
       "id": 1
+    },
+    {
+      "subject": "우유사기",
+      "completed": true,
+      "id": 2
+    },
+    {
+      "subject": "인강듣기",
+      "completed": false,
+      "id": 3
     }
   ]
 }
