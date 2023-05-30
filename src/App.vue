@@ -1,22 +1,26 @@
 <template>
     <div class="container">
+        <h4>count : {{ count }} </h4>
+        <h4>doubleCountComputed : {{ doubleCountComputed }} </h4>
+        <h4>doubleCountComputed : {{ doubleCountComputed }} </h4>
+        <h4>doubleCountMethod : {{ doubleCountMethod() }} </h4>
+        <h4>doubleCountMethod : {{ doubleCountMethod() }} </h4>
+        <button @click="count++">Add One</button>
         <h2>TO-DO-LIST</h2>
-        <TodoSimpleForm @add-todo="addTodo"/>
-        
+        <TodoSimpleForm @add-todo="addTodo" />
+
         <div v-if="!todos.length">
             할 일을 추가해주세요
         </div>
-        <TodoList 
-                  :todos="todos" 
+        <TodoList :todos="todos"
                   @toggle-todo="toggleTodo"
-                  @delete-todo="deleteTodo"
-         />
+                  @delete-todo="deleteTodo" />
     </div>
 </template>                         
 
 <script>
     //import { reactive } from 'vue'; // 객체
-    import { ref } from 'vue';    // 원시타입
+    import { ref, computed } from 'vue';    // 원시타입
     import TodoSimpleForm from './components/TodoSimpleForm.vue';
     import TodoList from './components/TodoList.vue';
 
@@ -45,12 +49,26 @@
                 todos.value[index].completed = !todos.value[index].completed;
             };
 
+            const count = ref(1);
+            const doubleCountComputed = computed(() => {
+                console.log('computed');
+                return count.value * 2;
+            });
+
+            const doubleCountMethod = () => {
+                console.log('Method');
+                return count.value * 2;
+            };
+
             return {
                 addTodo
                 , todos
                 , todoStyle
                 , deleteTodo
                 , toggleTodo
+                , count
+                , doubleCountComputed
+                , doubleCountMethod
             };
         }
     }
