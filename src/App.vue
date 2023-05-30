@@ -34,13 +34,19 @@
         },
         setup() {
             const todos = ref([]);
-            const todoStyle = {
-                textDecoration: 'line-through',
-                color: 'gray'
-            };
-
             const error = ref('');
 
+            const getTodos = async () => {
+                try {
+                    const res = await axios.get('http://localhost:3000/todos');
+                    todos.value = res.data;                    
+                } catch (err) {
+                    console.log(err);
+                    error.value = 'Something went wrong';
+                }
+            };
+
+            getTodos();
                           //비동기 함수
             const addTodo = async (todo) => {
                 error.value = '';
@@ -89,7 +95,6 @@
             return {
                 addTodo
                 , todos
-                , todoStyle
                 , deleteTodo
                 , toggleTodo
                 , searchText
