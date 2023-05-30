@@ -41,10 +41,21 @@
 
             const error = ref('');
 
-            //DB에 저장
-            const addTodo = (todo) => {
+                          //비동기 함수
+            const addTodo = async (todo) => {
                 error.value = '';
-                axios.post('http://localhost:3000/todos', {
+                try {
+                    //DB에 저장
+                    const res = await axios.post('http://localhost:3000/todos', {
+                        subject: todo.subject,
+                        completed: todo.completed
+                    });
+                    todos.value.push(res.data);
+                } catch (err) {
+                    console.log(err);
+                    error.value = 'Something went wrong';
+                }
+/*                await res = axios.post('http://localhost:3000/todos', {
                     subject: todo.subject,
                     completed: todo.completed
                 }).then(res => {
@@ -53,7 +64,7 @@
                 }).catch(err => {
                     console.log(err);
                     error.value = 'Something went wrong';
-                });
+                });*/
             };
 
             const deleteTodo = (index) => {
