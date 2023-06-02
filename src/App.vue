@@ -23,22 +23,21 @@
             <ul class="pagination">
                 <li class="page-item">
                     <a v-if="currentPage !== 1"
-                        class="page-link" href="#">Previous</a>
+                        class="page-link cursor" @click="getTodos(currentPage -1)">Previous</a>
                 </li>
                 <li v-for="page in numberOfPages"
                     :key="page"
-                    class="page-item"
+                    class="page-item cursor"
                     :class="currentPage === page ? 'active' : ''"
                 >
-                    <a class="page-link" href="#">{{ page }}</a>
+                    <a class="page-link" @click="getTodos(page)">{{ page }}</a>
                 </li>
                 <li class="page-item">
                     <a v-if="currentPage != numberOfPages"
-                    class="page-link" href="#">Next</a>
+                    class="page-link cursor" @click="getTodos(currentPage + 1)">Next</a>
                 </li>
             </ul>
         </nav>
-        {{ numberOfPages }}
     </div>
 </template>                    
 
@@ -65,10 +64,11 @@
                 return Math.ceil(numberOfTodos.value/limit);
             });
 
-            const getTodos = async () => {
+            const getTodos = async (page = currentPage.value) => {
+                currentPage.value = page;
                 try {
                     const res = await axios.get(
-                        `http://localhost:3000/todos?_page=${currentPage.value}&_limit=${limit}`
+                        `http://localhost:3000/todos?_page=${page}&_limit=${limit}`
                         );
                     numberOfTodos.value = res.headers['x-total-count'];
                     todos.value = res.data;                    
@@ -152,6 +152,7 @@
                 , error
                 , numberOfPages
                 , currentPage
+                , getTodos
             };
         }
     }
@@ -161,5 +162,8 @@
     .todo {
         color: gray;
         text-decoration-line : line-through;
+    }
+    .cursor {
+        cursor: pointer;
     }
 </style>
