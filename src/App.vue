@@ -43,7 +43,7 @@
 
 <script>
     //import { reactive } from 'vue'; // 객체
-    import { ref, computed } from 'vue';    // 원시타입
+    import { ref, computed, watch } from 'vue';    // 원시타입
     import TodoSimpleForm from './components/TodoSimpleForm.vue';
     import TodoList from './components/TodoList.vue';
     import axios from 'axios';
@@ -60,22 +60,13 @@
             let limit = 5;
             const currentPage = ref(1);
 
-            const numberOfPages = computed(() => {
-                return Math.ceil(numberOfTodos.value/limit);
+            watch([currentPage, numberOfTodos], (currentPage, prev) => {
+                console.log(currentPage, prev);
             });
 
-            // const a = reactivce ({
-            //     b:1
-            // });
-
-            // watchEffect(() => {
-            //     //console.log(currentPage.value);
-            //     //console.log(numberOfTodos.value);
-            //     console.log(numberOfPages.value);   //computed
-            //     console.log(a.b);
-            // });
-            // a.b = 4;
-            
+            const numberOfPages = computed(() => {
+                return Math.ceil(numberOfTodos.value/limit);
+            });        
 
             const getTodos = async (page = currentPage.value) => {
                 currentPage.value = page;
