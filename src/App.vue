@@ -43,7 +43,7 @@
 
 <script>
     //import { reactive } from 'vue'; // 객체
-    import { ref, computed} from 'vue';    // 원시타입
+    import { ref, computed } from 'vue';    // 원시타입
     import TodoSimpleForm from './components/TodoSimpleForm.vue';
     import TodoList from './components/TodoList.vue';
     import axios from 'axios';
@@ -57,12 +57,25 @@
             const todos = ref([]);
             const error = ref('');
             const numberOfTodos = ref(0);
-            const limit = 5;
+            let limit = 5;
             const currentPage = ref(1);
 
             const numberOfPages = computed(() => {
                 return Math.ceil(numberOfTodos.value/limit);
             });
+
+            // const a = reactivce ({
+            //     b:1
+            // });
+
+            // watchEffect(() => {
+            //     //console.log(currentPage.value);
+            //     //console.log(numberOfTodos.value);
+            //     console.log(numberOfPages.value);   //computed
+            //     console.log(a.b);
+            // });
+            // a.b = 4;
+            
 
             const getTodos = async (page = currentPage.value) => {
                 currentPage.value = page;

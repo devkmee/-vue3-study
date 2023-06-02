@@ -26,6 +26,7 @@
 </template>
 
 <script>
+    //import { watchEffect } from 'vue';
     export default {
         //부모 컴포넌트에서 바인딩한 이름으로 받아옴 
         //props: ['todos']
@@ -40,6 +41,10 @@
         emits: ['toggle-todo', 'delete-todo'],
 
         setup(props, { emit } ) {
+            // watchEffect(() => {
+            //     console.log(props.todos.length);
+            // });
+
             const toggleTodo = (index) => {
                 emit('toggle-todo', index);
             };
