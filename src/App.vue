@@ -5,6 +5,7 @@
                type="text"
                v-model="searchText"
                placeholder="Search"
+               @keyup.enter="searchTodo"
         />
         <hr />
         <TodoSimpleForm @add-todo="addTodo" />
@@ -145,9 +146,20 @@
                 }
                 console.log(todos.value[index]);
             };
-
-            watch(searchText, () => {
+            
+            //검색어 입력 시 한 글자 단위로 요청 보내서 timeout 추가
+            let timeout = null;
+            const searchTodo = () => {
+                clearTimeout(timeout);
                 getTodos(1);
+            };
+            
+            watch(searchText, () => {
+                //마지막 글자가 아니면 클리어
+                clearTimeout(timeout);
+                timeout = setTimeout( () => {
+                    getTodos(1);
+                }, 2000 );
             });
 
             // const filteredTodos = computed(()  => {
@@ -169,6 +181,7 @@
                 , numberOfPages
                 , currentPage
                 , getTodos
+                , searchTodo
             };
         }
     }
