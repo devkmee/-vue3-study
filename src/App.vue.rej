@@ -1,0 +1,14 @@
+diff a/src/App.vue b/src/App.vue	(rejected hunks)
+@@ -11,10 +11,10 @@
+         <div style="color:red">
+             {{error}}
+         </div>
+-        <div v-if="!todos.length">
++        <div v-if="!filteredTodos.length">
+             There is nothing to display
+         </div>
+-        <TodoList :todos="todos"
++        <TodoList :todos="filteredTodos"
+                   @toggle-todo="toggleTodo"
+                   @delete-todo="deleteTodo" 
+         />
