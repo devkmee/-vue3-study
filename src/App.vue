@@ -1,4 +1,5 @@
 <template>
+    <router-view/>
     <div class="container">
         <h2>TO-DO-LIST</h2>
         <input class="form-control"
