@@ -11,7 +11,9 @@
     </nav>
 
     <!--라우터-->
-    <router-view/>
+    <div class="container">
+        <router-view/>
+    </div>
 </template>                    
 
 <script>
