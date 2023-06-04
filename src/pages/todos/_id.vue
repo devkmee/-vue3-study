@@ -2,22 +2,43 @@
   <h1>To-Do Page</h1>
   <div v-if="loading">Loading...</div>
   <form v-else>
-    <div>
-        <labe>Todo Subject</labe>
-        <input v-model="todo.subject" type="text" class="form-control">
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <labe>Subject</labe>
+                <input v-model="todo.subject" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <labe>Status</labe>
+                <div>
+                    <button type="button"
+                            class="btn"
+                            :class="todo.completed ? 'btn-success' : 'btn-danger'"
+                            @click="toggleTodoStatus"
+                    >
+                    {{ todo.completed ? 'Completed' : 'Incomplete' }}
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-    <button class="btn btn-primary">Save</button>
+    
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button class="btn btn-outline-dark ml-2" @click="moveToToListPage">Cancel</button>
   </form>
 </template>
 
 <script>
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
 import { ref } from '@vue/reactivity';
 
 export default {
     setup(){
         const route = useRoute();
+        const router = useRouter();
         const todo = ref(null);
         const loading = ref(true);
 
@@ -27,11 +48,23 @@ export default {
             todo.value = res.data;
             loading.value = false;
         };
+        const toggleTodoStatus = () => {
+            todo.value.completed = !todo.value.completed;
+        };
+
+        const moveToToListPage = () => {
+            router.push({
+                name: 'Todos'
+            })
+        };
+
         getTodo();
 
         return {
             todo,
-            loading
+            loading,
+            toggleTodoStatus,
+            moveToToListPage
         };
     }
 }
