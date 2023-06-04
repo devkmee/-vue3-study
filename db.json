@@ -21,7 +21,7 @@
       "id": 9
     },
     {
-      "subject": "7",
+      "subject": "711",
       "completed": false,
       "id": 10
     },
@@ -29,11 +29,6 @@
       "subject": "수정",
       "completed": true,
       "id": 11
-    },
-    {
-      "subject": "11",
-      "completed": true,
-      "id": 14
     },
     {
       "subject": "12",
@@ -46,8 +41,8 @@
       "id": 20
     },
     {
-      "subject": "new todosss",
-      "completed": true,
+      "subject": "new todosss221",
+      "completed": false,
       "id": 21
     }
   ]
