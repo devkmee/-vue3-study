@@ -32,12 +32,13 @@
         :message="toastMessage"
         :type="toastAlertType"
     />
+    <div id="devKmee">coder</div>
 </template>
 
 <script>
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
-import { ref, computed } from 'vue';
+import { ref, computed, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from 'vue';
 import _ from 'lodash';
 import Toast from '@/components/Toast.vue';
 
@@ -46,6 +47,38 @@ export default {
         Toast
     },
     setup(){
+        //DOM 마운트 전 실행
+        onBeforeMount ( () => {
+            console.log('onBeforeMount : ', document.querySelector('#devKmee'));
+        });
+        
+        //DOM 마운트 후 실행
+        onMounted ( () => {
+            console.log('onMounted : ', document.querySelector('#devKmee'));
+        }); 
+
+        //값 uppdate 전 실행 
+        onBeforeUpdate ( () => {
+            console.log('onBeforeUpdate : ');
+        }); 
+
+        //값 uppdate 후 실행 
+        onUpdated ( () => {
+            console.log('onUpdated : ');
+        }); 
+
+        //DOM 언마운트 후 실행 (주로 메모리 정리를 위해 사용)
+        onUnmounted ( () => {
+            console.log('onUnmounted : ');
+        }); 
+
+        //DOM 언마운트 전 실행  
+        onBeforeUnmount ( () => {
+            console.log('onBeforeUnmount : ');
+        }); 
+
+        console.log('hellow vue');
+
         const route = useRoute();
         const router = useRouter();
         const todo = ref(null);
