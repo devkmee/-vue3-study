@@ -31,11 +31,6 @@
       "id": 11
     },
     {
-      "subject": "123dd",
-      "completed": false,
-      "id": 15
-    },
-    {
       "subject": "new todo",
       "completed": false,
       "id": 20
@@ -98,12 +93,6 @@
       "completed": false,
       "body": "ㄴㄴㅇ",
       "id": 30
-    },
-    {
-      "subject": "ㄴㄴ",
-      "completed": false,
-      "body": "ㅇㅇ",
-      "id": 31
     }
   ]
 }

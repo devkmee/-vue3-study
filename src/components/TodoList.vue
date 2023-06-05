@@ -20,23 +20,29 @@
             </div>
             <div>
                 <button class="btn btn-danger btn-sm"
-                        @click.stop="delTodo(index)">
+                        @click.stop="openModal(t.id)">
                     DELETE
                 </button>
             </div>
         </div>
-
+        <Modal v-if="shoqModal"
+               @close="closeModal"
+        />
     </div>
 </template>
 
 <script>
     //import { watchEffect } from 'vue';
     import { useRouter } from 'vue-router';
+    import Modal from '@/components/Modal.vue';
+    import { ref } from 'vue';
 
     export default {
+        components:{
+            Modal
+        },
         //부모 컴포넌트에서 바인딩한 이름으로 받아옴 
         //props: ['todos']
-
         //부모 컴포넌트에서 바인딩한 todos 객체로 받아서 정의
         props: {
             todos: {
@@ -52,9 +58,20 @@
             // });
             
             const router = useRouter();
+            const shoqModal = ref(false);
+            const todoDeleteId = ref(null);
 
             const toggleTodo = (index, event) => {
                 emit('toggle-todo', index, event.target.checked);
+            };
+
+            const openModal = (id) => {
+                todoDeleteId.value = id;
+                shoqModal.value = true;
+            };
+            const closeModal = (id) => {
+                todoDeleteId.value = null;
+                shoqModal.value = false;
             };
 
             const delTodo = (index) => {
@@ -75,7 +92,10 @@
             return {
                 toggleTodo,
                 delTodo,
-                moveToPage
+                moveToPage,
+                shoqModal,
+                openModal,
+                closeModal
             }
         }
     };
