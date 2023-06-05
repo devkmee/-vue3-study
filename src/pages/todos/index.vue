@@ -1,7 +1,12 @@
 <template>
     <div>Todos page</div>
     <div class="container">
-        <h2>TO-DO-LIST</h2>
+        <div class="d-flex justify-content-between mb-3">
+            <h2>TO-DO-LIST</h2>
+            <button class="btn btn-primary"
+                    @click="moveToCreatePage"
+            >Create Todo</button>
+        </div>
         <input class="form-control"
                type="text"
                v-model="searchText"
@@ -55,6 +60,7 @@
     import axios from 'axios';
     import Toast from '@/components/Toast.vue';
     import { useToast } from '@/composables/toast';
+    import { useRouter } from 'vue-router';
 
     export default {
         components: {
@@ -63,13 +69,13 @@
             Toast
         },
         setup() {
+            const router = useRouter();
             const todos = ref([]);
             const error = ref('');
             const numberOfTodos = ref(0);
             let limit = 5;
             const currentPage = ref(1);
             const searchText = ref('');
-
 
             const {showToast, toastMessage, toastAlertType, triggerToast} = useToast();
             
@@ -174,6 +180,12 @@
                 }
                 console.log(todos.value[index]);
             };
+
+            const moveToCreatePage = () => {
+                router.push({
+                    name: 'TodoCreate',
+                })
+            };
             
             //검색어 입력 시 한 글자 단위로 요청 보내서 timeout 추가
             let timeout = null;
@@ -214,6 +226,7 @@
                 ,toastMessage
                 ,showToast
                 ,triggerToast
+                ,moveToCreatePage
             };
         }
     }
