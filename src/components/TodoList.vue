@@ -25,10 +25,13 @@
                 </button>
             </div>
         </div>
-        <Modal v-if="showModal"
+
+        <teleport to="#modal" >
+            <Modal v-if="showModal"
                @close="closeModal"
                @delete="delTodo"
         />
+        </teleport>
     </div>
 </template>
 
