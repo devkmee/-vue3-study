@@ -15,7 +15,7 @@
               type="text" 
               class="form-control"
             >
-            <div v-if="subjectError" style="color: red;"> 
+            <div v-if="subjectError" class="text-red"> 
                 {{ subjectError }}
             </div>
           </div>
@@ -180,6 +180,15 @@
       }
   }
   </script>
-  
-  <style>
+
+<!--이 컴포넌트에만 적용되는 style-->
+  <style scoped>
+  .text-red {
+    color: red;
+  }
   </style>
+
+<!-- 모든 컴포넌트에 적용되는 style-->
+  <style>
+
+</style>
