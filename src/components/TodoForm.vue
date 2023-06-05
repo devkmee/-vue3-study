@@ -15,6 +15,9 @@
               type="text" 
               class="form-control"
             >
+            <div v-if="subjectError" style="color: red;"> 
+                {{ subjectError }}
+            </div>
           </div>
         </div>
         <div v-if="editing" class="col-6">
@@ -86,6 +89,7 @@
               completed: false,
               body: ''
           });
+          const subjectError = ref('');
           const originalTodo = ref(null);
           const loading = ref(false);
           const {
@@ -125,6 +129,11 @@
               getTodo();
           }
           const onSave = async () => {
+          subjectError.value = '';
+          if (!todo.value.subject) {
+            subjectError.value = 'Subject is required!';
+            return;
+          }
           try {
             let res;
             const data = {
@@ -132,11 +141,14 @@
               completed: todo.value.completed,
               body: todo.value.body,
             };
+            //수정
             if (props.editing) {
               res = await axios.put(`
                 http://localhost:3000/todos/${todoId}
               `, data);
               originalTodo.value = {...res.data};
+            
+            //등록
             } else {
               res = await axios.post(`
                 http://localhost:3000/todos
@@ -163,6 +175,7 @@
             showToast,
             toastMessage,
             toastAlertType,
+            subjectError
           };
       }
   }
