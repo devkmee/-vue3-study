@@ -13,7 +13,7 @@ export const useToast = () => {
             toastMessage.value = '';
             toastAlertType.value = '';
             showToast.value = false;
-        }, 1000 )
+        }, 3000 )
     }
 
     onUnmounted ( () => {

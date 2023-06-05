@@ -57,11 +57,13 @@
         Cancel
       </button>
     </form>
-    <Toast 
-      v-if="showToast" 
-      :message="toastMessage"
-      :type="toastAlertType"
-    />
+    <transition name="fade">
+        <Toast
+        v-if="showToast" 
+        :message="toastMessage"
+        :type="toastAlertType"
+        />
+    </transition>
   </template>
   
   <script>
@@ -185,6 +187,20 @@
   <style scoped>
   .text-red {
     color: red;
+  }
+  
+  .fade-enter-active, .fade-leave-active{
+    transition:  all 0.5s ease;
+  }
+
+  .fade-enter-from, .fade-leave-to{
+    transform:  translateY(-30px);
+    opacity: 0;
+  }
+
+  .fade-enter-to, .fade-leave-from{
+    transform:  translateY(0px);
+    opacity: 1;
   }
   </style>
 
