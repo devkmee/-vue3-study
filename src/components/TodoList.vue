@@ -25,8 +25,9 @@
                 </button>
             </div>
         </div>
-        <Modal v-if="shoqModal"
+        <Modal v-if="showModal"
                @close="closeModal"
+               @delete="delTodo"
         />
     </div>
 </template>
@@ -58,7 +59,7 @@
             // });
             
             const router = useRouter();
-            const shoqModal = ref(false);
+            const showModal = ref(false);
             const todoDeleteId = ref(null);
 
             const toggleTodo = (index, event) => {
@@ -67,16 +68,18 @@
 
             const openModal = (id) => {
                 todoDeleteId.value = id;
-                shoqModal.value = true;
+                showModal.value = true;
             };
-            const closeModal = (id) => {
+            const closeModal = () => {
                 todoDeleteId.value = null;
-                shoqModal.value = false;
+                showModal.value = false;
             };
 
-            const delTodo = (index) => {
+            const delTodo = () => {
              //부모컴포넌트로 넘기는 이벤트이름,  인덱스
-                emit('delete-todo', index);
+                emit('delete-todo', todoDeleteId.value);
+                showModal.value = false;
+                todoDeleteId.value = null;
             };
 
             const moveToPage = (todoId) => {
@@ -93,7 +96,7 @@
                 toggleTodo,
                 delTodo,
                 moveToPage,
-                shoqModal,
+                showModal,
                 openModal,
                 closeModal
             }

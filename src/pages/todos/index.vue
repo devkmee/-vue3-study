@@ -21,7 +21,7 @@
         </div>
         <TodoList :todos="todos"
                   @toggle-todo="toggleTodo"
-                  @delete-todo="deleteTodo" 
+                  @delete-todo="deleteTodo"
         />
         <hr>
         <nav aria-label="Page navigation example">
@@ -149,9 +149,8 @@
                 });*/
             };
 
-            const deleteTodo = async (index) => {
+            const deleteTodo = async (id) => {
                 error.value = '';
-                const id = todos.value[index].id;
                 try {
                     await axios.delete('http://localhost:3000/todos/' + id);
                     getTodos(1);
