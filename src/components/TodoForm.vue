@@ -8,17 +8,9 @@
     >
       <div class="row">
         <div class="col-6">
-          <div class="form-group">
-            <label>Subject</label>
-            <input 
-              v-model="todo.subject" 
-              type="text" 
-              class="form-control"
-            >
-            <div v-if="subjectError" class="text-red"> 
-                {{ subjectError }}
-            </div>
-          </div>
+          <Input label="Subject" 
+                v-model:subject="todo.subject"
+                :error="subjectError"/>
         </div>
         <div v-if="editing" class="col-6">
           <div class="form-group">
@@ -69,13 +61,16 @@
   <script>
   import { useRoute, useRouter } from 'vue-router';
   import axios from 'axios';
-  import { ref, computed  } from 'vue';
+  import { ref, computed, onUpdated  } from 'vue';
   import _ from 'lodash';
   import Toast from '@/components/Toast.vue';
   import { useToast } from '@/composables/toast';
+  import Input from '@/components/input.vue';
+
   export default {
     components: {
-      Toast
+      Toast,
+      Input
     },
     props: {
         editing: {
@@ -91,6 +86,11 @@
               completed: false,
               body: ''
           });
+
+          onUpdated(() => {
+            console.log(todo.value.subject);
+          });
+
           const subjectError = ref('');
           const originalTodo = ref(null);
           const loading = ref(false);
@@ -100,7 +100,9 @@
             showToast,
             triggerToast
           } = useToast();
-          const todoId = route.params.id        
+
+          const todoId = route.params.id
+
           const getTodo = async () => {
               loading.value = true;
             try {
@@ -177,7 +179,7 @@
             showToast,
             toastMessage,
             toastAlertType,
-            subjectError
+            subjectError,
           };
       }
   }
