@@ -1,38 +1,41 @@
 <template>
-    <div class="card mt-2"
+    <!-- <div class="card mt-2"
          v-for="(t, index) in todos"
-         :key="t.id">
-
-        <div class="card-body p-2 d-flex alighn-items-center"
-             style="cursor: pointer"
-             @click="moveToPage(t.id)"
+         :key="t.id"> -->
+        <List :items="todos"
         >
-            <div class="flex-grow-1">
-                <input class="ml-2 mr-2"
-                       type="checkbox"
-                       :checked="t.completed"
-                @change="toggleTodo(index, $event)"
-                @click.stop
-                />
-                <span :class=" { todo: t.completed} ">
-                    {{ t.subject }}
-                </span>
-            </div>
-            <div>
-                <button class="btn btn-danger btn-sm"
-                        @click.stop="openModal(t.id)">
-                    DELETE
-                </button>
-            </div>
-        </div>
-
+            <template #default="{ item, index }">
+                <div class="card-body p-2 d-flex alighn-items-center"
+                    style="cursor: pointer"
+                    @click="moveToPage(item.id)"
+                >
+                    <div class="flex-grow-1">
+                        <input class="ml-2 mr-2"
+                            type="checkbox"
+                            :checked="item.completed"
+                        @change="toggleTodo(index, $event)"
+                        @click.stop
+                        />
+                        <span :class=" { todo: item.completed} ">
+                            {{ item.subject }}
+                        </span>
+                    </div>
+                    <div>
+                        <button class="btn btn-danger btn-sm"
+                                @click.stop="openModal(item.id)">
+                            DELETE
+                        </button>
+                    </div>
+                </div>
+            </template>
+        </List>
         <teleport to="#modal" >
             <Modal v-if="showModal"
                @close="closeModal"
                @delete="delTodo"
         />
         </teleport>
-    </div>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -40,10 +43,12 @@
     import { useRouter } from 'vue-router';
     import Modal from '@/components/DeleteModal.vue';
     import { ref } from 'vue';
+    import List from '@/components/List.vue';
 
     export default {
         components:{
-            Modal
+            Modal,
+            List
         },
         //부모 컴포넌트에서 바인딩한 이름으로 받아옴 
         //props: ['todos']

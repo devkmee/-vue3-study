@@ -36,11 +36,6 @@
       "id": 20
     },
     {
-      "subject": "new todosss2",
-      "completed": true,
-      "id": 21
-    },
-    {
       "subject": "생성",
       "completed": false,
       "body": "ㅇㅇ",
@@ -63,6 +58,12 @@
       "completed": false,
       "body": "ㄴㄴㅇ",
       "id": 30
+    },
+    {
+      "subject": "신규생성",
+      "completed": false,
+      "body": "모듈~~",
+      "id": 31
     }
   ]
 }
