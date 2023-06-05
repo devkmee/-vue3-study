@@ -38,7 +38,7 @@
 <script>
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
-import { ref, computed, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from 'vue';
+import { ref, computed, onUnmounted } from 'vue';
 import _ from 'lodash';
 import Toast from '@/components/Toast.vue';
 
@@ -47,35 +47,35 @@ export default {
         Toast
     },
     setup(){
-        //DOM 마운트 전 실행
-        onBeforeMount ( () => {
-            console.log('onBeforeMount : ', document.querySelector('#devKmee'));
-        });
+        // //DOM 마운트 전 실행
+        // onBeforeMount ( () => {
+        //     console.log('onBeforeMount : ', document.querySelector('#devKmee'));
+        // });
         
-        //DOM 마운트 후 실행
-        onMounted ( () => {
-            console.log('onMounted : ', document.querySelector('#devKmee'));
-        }); 
+        // //DOM 마운트 후 실행
+        // onMounted ( () => {
+        //     console.log('onMounted : ', document.querySelector('#devKmee'));
+        // }); 
 
-        //값 uppdate 전 실행 
-        onBeforeUpdate ( () => {
-            console.log('onBeforeUpdate : ');
-        }); 
+        // //값 uppdate 전 실행 
+        // onBeforeUpdate ( () => {
+        //     console.log('onBeforeUpdate : ');
+        // }); 
 
-        //값 uppdate 후 실행 
-        onUpdated ( () => {
-            console.log('onUpdated : ');
-        }); 
+        // //값 uppdate 후 실행 
+        // onUpdated ( () => {
+        //     console.log('onUpdated : ');
+        // }); 
+        
+        // //DOM 언마운트 전 실행  
+        // onBeforeUnmount ( () => {
+            //     console.log('onBeforeUnmount : ');
+            // }); 
 
-        //DOM 언마운트 후 실행 (주로 메모리 정리를 위해 사용)
-        onUnmounted ( () => {
-            console.log('onUnmounted : ');
-        }); 
-
-        //DOM 언마운트 전 실행  
-        onBeforeUnmount ( () => {
-            console.log('onBeforeUnmount : ');
-        }); 
+        // //DOM 언마운트 후 실행 (주로 메모리 정리를 위해 사용)
+        // onUnmounted ( () => {
+        //     console.log('onUnmounted : ');
+        // }); 
 
         console.log('hellow vue');
 
@@ -87,7 +87,13 @@ export default {
         const showToast = ref(false);
         const toastMessage = ref('');
         const toastAlertType = ref('');
+        const timeout = ref(null);
         const todoId = route.params.id;
+
+        onUnmounted ( () => {
+            console.log('onUnmounted : ');
+            clearTimeout(timeout.value);
+        }); 
 
         const getTodo = async() => {
             try{
@@ -123,11 +129,12 @@ export default {
             toastMessage.value = msg;
             toastAlertType.value = type;
             showToast.value = true;
-            setTimeout( () => {
+            timeout.value = setTimeout( () => {
+                console.log('helloo');
                 toastMessage.value = '';
                 toastAlertType.value = '';
                 showToast.value = false;
-            }, 1000 )
+            }, 5000 )
         };
 
         const onSave = async () => {
