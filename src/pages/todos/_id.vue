@@ -38,9 +38,10 @@
 <script>
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
-import { ref, computed, onUnmounted } from 'vue';
+import { ref, computed } from 'vue';
 import _ from 'lodash';
 import Toast from '@/components/Toast.vue';
+import { useToast } from '@/composables/toast';
 
 export default {
     components: {
@@ -77,23 +78,14 @@ export default {
         //     console.log('onUnmounted : ');
         // }); 
 
-        console.log('hellow vue');
-
         const route = useRoute();
         const router = useRouter();
         const todo = ref(null);
         const orginalTodo = ref(null);
         const loading = ref(true);
-        const showToast = ref(false);
-        const toastMessage = ref('');
-        const toastAlertType = ref('');
-        const timeout = ref(null);
         const todoId = route.params.id;
-
-        onUnmounted ( () => {
-            console.log('onUnmounted : ');
-            clearTimeout(timeout.value);
-        }); 
+        
+        const {showToast, toastMessage, toastAlertType, triggerToast} = useToast();
 
         const getTodo = async() => {
             try{
@@ -124,18 +116,6 @@ export default {
         };
 
         getTodo();
-
-        const triggerToast = (msg, type = 'success') => {
-            toastMessage.value = msg;
-            toastAlertType.value = type;
-            showToast.value = true;
-            timeout.value = setTimeout( () => {
-                console.log('helloo');
-                toastMessage.value = '';
-                toastAlertType.value = '';
-                showToast.value = false;
-            }, 5000 )
-        };
 
         const onSave = async () => {
             try{
