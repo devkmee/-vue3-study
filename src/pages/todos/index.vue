@@ -1,5 +1,4 @@
 <template>
-    <div>Todos page</div>
     <div class="container">
         <div class="d-flex justify-content-between mb-3">
             <h2>TO-DO-LIST</h2>

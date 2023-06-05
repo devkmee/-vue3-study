@@ -7,17 +7,16 @@
              style="cursor: pointer"
              @click="moveToPage(t.id)"
         >
-            <div class="form-check flex-grow-1">
-                <input class="form-check-input"
+            <div class="flex-grow-1">
+                <input class="ml-2 mr-2"
                        type="checkbox"
                        :checked="t.completed"
                 @change="toggleTodo(index, $event)"
                 @click.stop
                 />
-                <label class="form-check-label"
-                       :class=" { todo: t.completed} ">
+                <span :class=" { todo: t.completed} ">
                     {{ t.subject }}
-                </label>
+                </span>
             </div>
             <div>
                 <button class="btn btn-danger btn-sm"
