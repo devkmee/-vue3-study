@@ -14,7 +14,6 @@
                @keyup.enter="searchTodo"
         />
         <hr />
-        <TodoSimpleForm @add-todo="addTodo" />
         <div style="color:red">
             {{error}}
         </div>
@@ -55,7 +54,6 @@
 <script>
     //import { reactive } from 'vue'; // 객체
     import { ref, computed, watch } from 'vue';    // 원시타입
-    import TodoSimpleForm from '@/components/TodoSimpleForm.vue';
     import TodoList from '@/components/TodoList.vue';
     import axios from 'axios';
     import Toast from '@/components/Toast.vue';
@@ -64,7 +62,6 @@
 
     export default {
         components: {
-            TodoSimpleForm,
             TodoList,
             Toast
         },
