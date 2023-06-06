@@ -42,18 +42,6 @@
       "id": 23
     },
     {
-      "subject": "ㅠㅠ",
-      "completed": true,
-      "body": "ㅠㅠㅜㅠ",
-      "id": 25
-    },
-    {
-      "subject": "ㄴㄴ",
-      "completed": true,
-      "body": "ㅇㅇ",
-      "id": 29
-    },
-    {
       "subject": "ㅇㅇ",
       "completed": false,
       "body": "ㄴㄴㅇ",
@@ -64,6 +52,18 @@
       "completed": false,
       "body": "모듈~~",
       "id": 31
+    },
+    {
+      "subject": "할일",
+      "completed": false,
+      "body": "신기해",
+      "id": 32
+    },
+    {
+      "subject": "추가1",
+      "completed": true,
+      "body": "22",
+      "id": 33
     }
   ]
 }

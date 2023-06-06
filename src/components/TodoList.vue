@@ -42,8 +42,9 @@
     //import { watchEffect } from 'vue';
     import { useRouter } from 'vue-router';
     import Modal from '@/components/DeleteModal.vue';
-    import { ref } from 'vue';
+    import { ref, getCurrentInstance } from 'vue';
     import List from '@/components/List.vue';
+
 
     export default {
         components:{
@@ -61,7 +62,9 @@
         },
         emits: ['toggle-todo', 'delete-todo'],
 
-        setup(props, { emit } ) {
+        setup( ) {
+            const { emit } = getCurrentInstance ();
+
             // watchEffect(() => {
             //     console.log(props.todos.length);
             // });

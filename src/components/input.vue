@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { getCurrentInstance } from 'vue';
 
 export default {
     props: {
@@ -30,7 +31,11 @@ export default {
             required: true
         }
     },
-    setup(props, { emit }){
+    //setup(props, { emit }){
+    setup(){
+
+        const { emit } = getCurrentInstance ();
+
         const onInput = (event) => {
             //컴포넌트에 올릴 이름 update:props속성이름
             emit('update:subject', event.target.value)
