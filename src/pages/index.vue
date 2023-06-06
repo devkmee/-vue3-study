@@ -1,12 +1,20 @@
 <template>
-  <div>HOME</div>
+  <div>HOME Page</div>
+  <div>{{ count }}</div>
+  <button @click="count++">Add</button>
 </template>
 
 <script>
-/** 1.메    인 : /home  */
+import { useCount } from '@/composables/count';
 
 export default {
-
+  setup() {
+    const { count } = useCount();
+    console.log(count);
+    return {
+      count
+    }
+  }
 }
 </script>
 
