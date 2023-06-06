@@ -1,32 +1,24 @@
 <template>
-    <!--네비게이션-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <router-link class="navbar-brand" to="/">HOME</router-link>
-
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <router-link class="nav-link" :to="{ name: 'Todos'}">Todos</router-link>
-            </li>
-        </ul>
-    </nav>
-
-    <!--라우터-->
+    <Navbar />
     <div class="container">
         <router-view/>
     </div>
-
+    
     <Toast />
-</template>                    
-
-<script>
-import Toast from '@/components/Toast.vue';
-
-export default {
-    components : {
-        Toast
-    } 
-}
-</script>
-
-<style>
-</style>
+  </template>
+  
+  <script>
+  import Toast from '@/components/Toast.vue';
+  import Navbar from '@/components/Navbar.vue';
+  
+  export default {
+    components: {
+      Toast,
+      Navbar
+    },
+  }
+  </script>
+  
+  <style scoped>
+  
+  </style>

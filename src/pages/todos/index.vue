@@ -13,6 +13,7 @@
                @keyup.enter="searchTodo"
         />
         <hr />
+
         <div style="color:red">
             {{error}}
         </div>
@@ -24,25 +25,12 @@
                   @delete-todo="deleteTodo"
         />
         <hr>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a v-if="currentPage !== 1"
-                        class="page-link cursor" @click="getTodos(currentPage -1)">Previous</a>
-                </li>
-                <li v-for="page in numberOfPages"
-                    :key="page"
-                    class="page-item cursor"
-                    :class="currentPage === page ? 'active' : ''"
-                >
-                    <a class="page-link" @click="getTodos(page)">{{ page }}</a>
-                </li>
-                <li class="page-item">
-                    <a v-if="currentPage != numberOfPages"
-                    class="page-link cursor" @click="getTodos(currentPage + 1)">Next</a>
-                </li>
-            </ul>
-        </nav>
+        <Pagination
+            v-if="todos.length"
+            :numberOfPages = "numberOfPages"
+            :currentPage = "currentPage"
+            @click="getTodos"
+        />
     </div>
 </template>                    
 
@@ -53,10 +41,12 @@
     import axios from '@/axios';
     import { useToast } from '@/composables/toast';
     import { useRouter } from 'vue-router';
+    import Pagination from '@/components/Pagination.vue'
 
     export default {
         components: {
-            TodoList
+            TodoList,
+            Pagination
         },
         setup() {
             const router = useRouter();
@@ -68,39 +58,10 @@
             const searchText = ref('');
 
             const {showToast, toastMessage, toastAlertType, triggerToast} = useToast();
-            
-        //     const showToast = ref(false);
-        //     const toastTimeout = ref(null);
-        //     const toastMessage = ref('');
-        //     const toastAlertType = ref('');
-        //     const triggerToast = (msg, type = 'success') => {
-        //     toastMessage.value = msg;
-        //     toastAlertType.value = type;
-        //     showToast.value = true;
-        //     toastTimeout.value = setTimeout( () => {
-        //         toastMessage.value = '';
-        //         toastAlertType.value = '';
-        //         showToast.value = false;
-        //     }, 5000 )
-        // };
-
         
             const numberOfPages = computed(() => {
                 return Math.ceil(numberOfTodos.value/limit);
             });
-
-            // const a = reactivce ({
-            //     b:1
-            // });
-
-            // watchEffect(() => {
-            //     //console.log(currentPage.value);
-            //     //console.log(numberOfTodos.value);
-            //     console.log(numberOfPages.value);   //computed
-            //     console.log(a.b);
-            // });
-            // a.b = 4;
-            
 
             const getTodos = async (page = currentPage.value) => {
                 currentPage.value = page;
