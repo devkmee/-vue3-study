@@ -10,8 +10,8 @@ export const useToast = () => {
     // const toastAlertType = computed(() => store.state.toast.toastAlertType);
     // const showToast = computed(() => store.state.toast.showToast);
 
-    const triggerToast = (msg, type = 'success') => {
-        store.dispatch('toast/triggerToast', msg, type);
+    const triggerToast = (message, type = 'success') => {
+        store.dispatch('toast/triggerToast', {message:message, type:type});
     }
 
     return {
